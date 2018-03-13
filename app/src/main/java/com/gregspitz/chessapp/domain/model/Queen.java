@@ -7,14 +7,14 @@ package com.gregspitz.chessapp.domain.model;
 
 public class Queen extends ChessPiece {
 
-    public Queen(int file, int rank, boolean isWhite) {
-        super(file, rank, isWhite);
+    public Queen(boolean isWhite) {
+        super(isWhite);
     }
 
     @Override
-    public boolean canMove(int newFile, int newRank) {
-        return !(newFile - mCurrentFile == 0 && newRank - mCurrentRank == 0) &&
-                (Math.abs(newFile - mCurrentFile) == Math.abs(newRank - mCurrentRank) ||
-                        newFile == mCurrentFile || newRank == mCurrentRank);
+    public boolean canMove(int startFile, int startRank, int endFile, int endRank) {
+        return !(endFile - startFile == 0 && endRank - startRank == 0) &&
+                (Math.abs(endFile - startFile) == Math.abs(endRank - startRank) ||
+                        endFile == startFile || endRank == startRank);
     }
 }

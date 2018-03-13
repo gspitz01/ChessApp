@@ -7,13 +7,13 @@ package com.gregspitz.chessapp.domain.model;
 
 public class Rook extends ChessPiece {
 
-    public Rook(int file, int rank, boolean isWhite) {
-        super(file, rank, isWhite);
+    public Rook(boolean isWhite) {
+        super(isWhite);
     }
 
     @Override
-    public boolean canMove(int newFile, int newRank) {
-        return !(newFile - mCurrentFile == 0 && newRank - mCurrentRank == 0) &&
-                (newFile == mCurrentFile || newRank == mCurrentRank);
+    public boolean canMove(int startFile, int startRank, int endFile, int endRank) {
+        return !(endFile - startFile == 0 && endRank - startRank== 0) &&
+                (endFile == startFile || endRank == startRank);
     }
 }

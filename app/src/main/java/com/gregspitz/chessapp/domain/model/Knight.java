@@ -7,21 +7,21 @@ package com.gregspitz.chessapp.domain.model;
 
 public class Knight extends ChessPiece {
 
-    public Knight(int file, int rank, boolean isWhite) {
-        super(file, rank, isWhite);
+    public Knight(boolean isWhite) {
+        super(isWhite);
     }
 
     @Override
-    public boolean canMove(int newFile, int newRank) {
-        switch (newFile - mCurrentFile) {
+    public boolean canMove(int startFile, int startRank, int endFile, int endRank) {
+        switch (endFile - startFile) {
             case 2:
                 // Intentional fallthrough
             case -2:
-                return (newRank - mCurrentRank == 1) || (newRank - mCurrentRank == -1);
+                return (endRank - startRank== 1) || (endRank - startRank == -1);
             case 1:
                 // Intentional fallthrough
             case -1:
-                return (newRank - mCurrentRank == 2) || (newRank - mCurrentRank == -2);
+                return (endRank - startRank == 2) || (endRank - startRank == -2);
             default:
                 return false;
         }

@@ -20,48 +20,66 @@ public class RookTest {
 
     @Before
     public void setup() {
-        mWhiteRook = new Rook(STARTING_FILE, STARTING_RANK, true);
-        mBlackRook = new Rook(STARTING_FILE, STARTING_RANK, false);
+        mWhiteRook = new Rook(true);
+        mBlackRook = new Rook(false);
     }
 
     @Test
     public void blackAndWhiteRook_canMoveVerticallyAnyNumberOfSquares() {
         // Able to move more than 7 squares at a time so that I can implement larger boards
         for (int i = 1; i < 20; i++) {
-            assertTrue(mWhiteRook.canMove(STARTING_FILE, STARTING_RANK + i));
-            assertTrue(mWhiteRook.canMove(STARTING_FILE, STARTING_RANK - i));
-            assertTrue(mBlackRook.canMove(STARTING_FILE, STARTING_RANK + i));
-            assertTrue(mBlackRook.canMove(STARTING_FILE, STARTING_RANK - i));
+            assertTrue(mWhiteRook.canMove(STARTING_FILE, STARTING_RANK,
+                    STARTING_FILE, STARTING_RANK + i));
+            assertTrue(mWhiteRook.canMove(STARTING_FILE, STARTING_RANK,
+                    STARTING_FILE, STARTING_RANK - i));
+            assertTrue(mBlackRook.canMove(STARTING_FILE, STARTING_RANK,
+                    STARTING_FILE, STARTING_RANK + i));
+            assertTrue(mBlackRook.canMove(STARTING_FILE, STARTING_RANK,
+                    STARTING_FILE, STARTING_RANK - i));
         }
     }
 
     @Test
     public void blackAndWhiteRook_canMoveHorizontallyAnyNumberOfSquares() {
         for (int i = 1; i < 20; i++) {
-            assertTrue(mWhiteRook.canMove(STARTING_FILE + i, STARTING_RANK));
-            assertTrue(mWhiteRook.canMove(STARTING_FILE - i, STARTING_RANK));
-            assertTrue(mBlackRook.canMove(STARTING_FILE - i, STARTING_RANK));
-            assertTrue(mBlackRook.canMove(STARTING_FILE + i, STARTING_RANK));
+            assertTrue(mWhiteRook.canMove(STARTING_FILE, STARTING_RANK,
+                    STARTING_FILE + i, STARTING_RANK));
+            assertTrue(mWhiteRook.canMove(STARTING_FILE, STARTING_RANK,
+                    STARTING_FILE - i, STARTING_RANK));
+            assertTrue(mBlackRook.canMove(STARTING_FILE, STARTING_RANK,
+                    STARTING_FILE - i, STARTING_RANK));
+            assertTrue(mBlackRook.canMove(STARTING_FILE, STARTING_RANK,
+                    STARTING_FILE + i, STARTING_RANK));
         }
     }
 
     @Test
     public void blackAndWhiteRook_noMoveDoesNotCount() {
-        assertFalse(mWhiteRook.canMove(STARTING_FILE, STARTING_RANK));
-        assertFalse(mBlackRook.canMove(STARTING_FILE, STARTING_RANK));
+        assertFalse(mWhiteRook.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE, STARTING_RANK));
+        assertFalse(mBlackRook.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE, STARTING_RANK));
     }
 
     @Test
     public void blackAndWhiteRook_cannotMoveDiagonally() {
         for (int i = 1; i < 20; i++) {
-            assertFalse(mWhiteRook.canMove(STARTING_FILE + i, STARTING_RANK + i));
-            assertFalse(mWhiteRook.canMove(STARTING_FILE - i, STARTING_RANK - i));
-            assertFalse(mWhiteRook.canMove(STARTING_FILE - i, STARTING_RANK + i));
-            assertFalse(mWhiteRook.canMove(STARTING_FILE + i, STARTING_RANK - i));
-            assertFalse(mBlackRook.canMove(STARTING_FILE + i, STARTING_RANK + i));
-            assertFalse(mBlackRook.canMove(STARTING_FILE - i, STARTING_RANK - i));
-            assertFalse(mBlackRook.canMove(STARTING_FILE - i, STARTING_RANK + i));
-            assertFalse(mBlackRook.canMove(STARTING_FILE + i, STARTING_RANK - i));
+            assertFalse(mWhiteRook.canMove(STARTING_FILE, STARTING_RANK,
+                    STARTING_FILE + i, STARTING_RANK + i));
+            assertFalse(mWhiteRook.canMove(STARTING_FILE, STARTING_RANK,
+                    STARTING_FILE - i, STARTING_RANK - i));
+            assertFalse(mWhiteRook.canMove(STARTING_FILE, STARTING_RANK,
+                    STARTING_FILE - i, STARTING_RANK + i));
+            assertFalse(mWhiteRook.canMove(STARTING_FILE, STARTING_RANK,
+                    STARTING_FILE + i, STARTING_RANK - i));
+            assertFalse(mBlackRook.canMove(STARTING_FILE, STARTING_RANK,
+                    STARTING_FILE + i, STARTING_RANK + i));
+            assertFalse(mBlackRook.canMove(STARTING_FILE, STARTING_RANK,
+                    STARTING_FILE - i, STARTING_RANK - i));
+            assertFalse(mBlackRook.canMove(STARTING_FILE, STARTING_RANK,
+                    STARTING_FILE - i, STARTING_RANK + i));
+            assertFalse(mBlackRook.canMove(STARTING_FILE, STARTING_RANK,
+                    STARTING_FILE + i, STARTING_RANK - i));
 
         }
     }

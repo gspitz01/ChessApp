@@ -20,61 +20,103 @@ public class KnightTest {
 
     @Before
     public void setup() {
-        mWhiteKnight = new Knight(STARTING_FILE, STARTING_RANK, true);
-        mBlackKnight = new Knight(STARTING_FILE, STARTING_RANK, false);
+        mWhiteKnight = new Knight(true);
+        mBlackKnight = new Knight(false);
     }
 
     @Test
     public void blackAndWhiteKnight_canMoveInLShapeAnyDirection() {
-        assertTrue(mWhiteKnight.canMove(STARTING_FILE + 1, STARTING_RANK + 2));
-        assertTrue(mWhiteKnight.canMove(STARTING_FILE - 1, STARTING_RANK + 2));
-        assertTrue(mWhiteKnight.canMove(STARTING_FILE + 1, STARTING_RANK - 2));
-        assertTrue(mWhiteKnight.canMove(STARTING_FILE - 1, STARTING_RANK - 2));
-        assertTrue(mWhiteKnight.canMove(STARTING_FILE + 2, STARTING_RANK + 1));
-        assertTrue(mWhiteKnight.canMove(STARTING_FILE - 2, STARTING_RANK + 1));
-        assertTrue(mWhiteKnight.canMove(STARTING_FILE + 2, STARTING_RANK - 1));
-        assertTrue(mWhiteKnight.canMove(STARTING_FILE - 2, STARTING_RANK - 1));
-        assertTrue(mBlackKnight.canMove(STARTING_FILE + 1, STARTING_RANK + 2));
-        assertTrue(mBlackKnight.canMove(STARTING_FILE - 1, STARTING_RANK + 2));
-        assertTrue(mBlackKnight.canMove(STARTING_FILE + 1, STARTING_RANK - 2));
-        assertTrue(mBlackKnight.canMove(STARTING_FILE - 1, STARTING_RANK - 2));
-        assertTrue(mBlackKnight.canMove(STARTING_FILE + 2, STARTING_RANK + 1));
-        assertTrue(mBlackKnight.canMove(STARTING_FILE - 2, STARTING_RANK + 1));
-        assertTrue(mBlackKnight.canMove(STARTING_FILE + 2, STARTING_RANK - 1));
-        assertTrue(mBlackKnight.canMove(STARTING_FILE - 2, STARTING_RANK - 1));
+        assertTrue(mWhiteKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE + 1, STARTING_RANK + 2));
+        assertTrue(mWhiteKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE - 1, STARTING_RANK + 2));
+        assertTrue(mWhiteKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE + 1, STARTING_RANK - 2));
+        assertTrue(mWhiteKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE - 1, STARTING_RANK - 2));
+        assertTrue(mWhiteKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE + 2, STARTING_RANK + 1));
+        assertTrue(mWhiteKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE - 2, STARTING_RANK + 1));
+        assertTrue(mWhiteKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE + 2, STARTING_RANK - 1));
+        assertTrue(mWhiteKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE - 2, STARTING_RANK - 1));
+        assertTrue(mBlackKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE + 1, STARTING_RANK + 2));
+        assertTrue(mBlackKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE - 1, STARTING_RANK + 2));
+        assertTrue(mBlackKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE + 1, STARTING_RANK - 2));
+        assertTrue(mBlackKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE - 1, STARTING_RANK - 2));
+        assertTrue(mBlackKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE + 2, STARTING_RANK + 1));
+        assertTrue(mBlackKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE - 2, STARTING_RANK + 1));
+        assertTrue(mBlackKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE + 2, STARTING_RANK - 1));
+        assertTrue(mBlackKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE - 2, STARTING_RANK - 1));
     }
 
     @Test
     public void blackAndWhiteKnight_noMoveDoesNotCount() {
-        assertFalse(mWhiteKnight.canMove(STARTING_FILE, STARTING_RANK));
-        assertFalse(mBlackKnight.canMove(STARTING_FILE, STARTING_RANK));
+        assertFalse(mWhiteKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE, STARTING_RANK));
+        assertFalse(mBlackKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE, STARTING_RANK));
     }
 
     @Test
     public void blackAndWhiteKnight_cannotMoveInAnyOtherWay() {
-        assertFalse(mWhiteKnight.canMove(STARTING_FILE, STARTING_RANK + 1));
-        assertFalse(mWhiteKnight.canMove(STARTING_FILE, STARTING_RANK + 2));
-        assertFalse(mWhiteKnight.canMove(STARTING_FILE, STARTING_RANK - 1));
-        assertFalse(mWhiteKnight.canMove(STARTING_FILE, STARTING_RANK - 2));
-        assertFalse(mWhiteKnight.canMove(STARTING_FILE + 1, STARTING_RANK));
-        assertFalse(mWhiteKnight.canMove(STARTING_FILE + 2, STARTING_RANK));
-        assertFalse(mWhiteKnight.canMove(STARTING_FILE - 1, STARTING_RANK));
-        assertFalse(mWhiteKnight.canMove(STARTING_FILE - 2, STARTING_RANK));
-        assertFalse(mWhiteKnight.canMove(STARTING_FILE + 1, STARTING_RANK + 1));
-        assertFalse(mWhiteKnight.canMove(STARTING_FILE + 2, STARTING_RANK + 2));
-        assertFalse(mWhiteKnight.canMove(STARTING_FILE - 1, STARTING_RANK - 1));
-        assertFalse(mWhiteKnight.canMove(STARTING_FILE - 2, STARTING_RANK - 2));
-        assertFalse(mBlackKnight.canMove(STARTING_FILE, STARTING_RANK + 1));
-        assertFalse(mBlackKnight.canMove(STARTING_FILE, STARTING_RANK + 2));
-        assertFalse(mBlackKnight.canMove(STARTING_FILE, STARTING_RANK - 1));
-        assertFalse(mBlackKnight.canMove(STARTING_FILE, STARTING_RANK - 2));
-        assertFalse(mBlackKnight.canMove(STARTING_FILE + 1, STARTING_RANK));
-        assertFalse(mBlackKnight.canMove(STARTING_FILE + 2, STARTING_RANK));
-        assertFalse(mBlackKnight.canMove(STARTING_FILE - 1, STARTING_RANK));
-        assertFalse(mBlackKnight.canMove(STARTING_FILE - 2, STARTING_RANK));
-        assertFalse(mBlackKnight.canMove(STARTING_FILE + 1, STARTING_RANK + 1));
-        assertFalse(mBlackKnight.canMove(STARTING_FILE + 2, STARTING_RANK + 2));
-        assertFalse(mBlackKnight.canMove(STARTING_FILE - 1, STARTING_RANK - 1));
-        assertFalse(mBlackKnight.canMove(STARTING_FILE - 2, STARTING_RANK - 2));
+        assertFalse(mWhiteKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE, STARTING_RANK + 1));
+        assertFalse(mWhiteKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE, STARTING_RANK + 2));
+        assertFalse(mWhiteKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE, STARTING_RANK - 1));
+        assertFalse(mWhiteKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE, STARTING_RANK - 2));
+        assertFalse(mWhiteKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE + 1, STARTING_RANK));
+        assertFalse(mWhiteKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE + 2, STARTING_RANK));
+        assertFalse(mWhiteKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE - 1, STARTING_RANK));
+        assertFalse(mWhiteKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE - 2, STARTING_RANK));
+        assertFalse(mWhiteKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE + 1, STARTING_RANK + 1));
+        assertFalse(mWhiteKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE + 2, STARTING_RANK + 2));
+        assertFalse(mWhiteKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE - 1, STARTING_RANK - 1));
+        assertFalse(mWhiteKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE - 2, STARTING_RANK - 2));
+        assertFalse(mBlackKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE, STARTING_RANK + 1));
+        assertFalse(mBlackKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE, STARTING_RANK + 2));
+        assertFalse(mBlackKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE, STARTING_RANK - 1));
+        assertFalse(mBlackKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE, STARTING_RANK - 2));
+        assertFalse(mBlackKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE + 1, STARTING_RANK));
+        assertFalse(mBlackKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE + 2, STARTING_RANK));
+        assertFalse(mBlackKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE - 1, STARTING_RANK));
+        assertFalse(mBlackKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE - 2, STARTING_RANK));
+        assertFalse(mBlackKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE + 1, STARTING_RANK + 1));
+        assertFalse(mBlackKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE + 2, STARTING_RANK + 2));
+        assertFalse(mBlackKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE - 1, STARTING_RANK - 1));
+        assertFalse(mBlackKnight.canMove(STARTING_FILE, STARTING_RANK,
+                STARTING_FILE - 2, STARTING_RANK - 2));
     }
 }
