@@ -1,5 +1,12 @@
 package com.gregspitz.chessapp.domain.model;
 
+import com.gregspitz.chessapp.domain.model.pieces.Bishop;
+import com.gregspitz.chessapp.domain.model.pieces.King;
+import com.gregspitz.chessapp.domain.model.pieces.Knight;
+import com.gregspitz.chessapp.domain.model.pieces.Pawn;
+import com.gregspitz.chessapp.domain.model.pieces.Queen;
+import com.gregspitz.chessapp.domain.model.pieces.Rook;
+
 import org.junit.Before;
 import org.junit.Test;
 

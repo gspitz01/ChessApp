@@ -1,4 +1,4 @@
-package com.gregspitz.chessapp.domain.model;
+package com.gregspitz.chessapp.domain.model.pieces;
 
 /**
  * Queen

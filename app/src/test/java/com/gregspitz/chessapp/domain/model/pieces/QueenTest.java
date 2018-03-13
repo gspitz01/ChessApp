@@ -1,4 +1,6 @@
-package com.gregspitz.chessapp.domain.model;
+package com.gregspitz.chessapp.domain.model.pieces;
+
+import com.gregspitz.chessapp.domain.model.pieces.Queen;
 
 import org.junit.Before;
 import org.junit.Test;
