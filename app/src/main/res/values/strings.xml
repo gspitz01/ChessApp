@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ChessApp</string>
+    <string name="starting_position_button_text">Starting Position</string>
+</resources>
