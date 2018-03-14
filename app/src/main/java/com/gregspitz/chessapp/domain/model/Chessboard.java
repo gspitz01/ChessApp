@@ -16,6 +16,7 @@ import com.gregspitz.chessapp.domain.model.pieces.Rook;
  * Can move one piece to another square
  * Is aware of the pieces in its squares
  * Any piece can capture any other piece regardless of color
+ * Doesn't keep track of pieces in between, i.e. thinks every piece can jump
  * 0th rank is black's 1st rank, i.e. the 8th rank of the physical board
  * i.e. file: 0, rank: 7 is square a1
  */
@@ -83,12 +84,72 @@ public class Chessboard {
     }
 
     public boolean movePiece(int startFile, int startRank, int endFile, int endRank) {
-        if (mSquares == null) {
+        if (mSquares == null || mSquares[startFile][startRank] == null) {
             return false;
         }
 
-        if (mSquares[startFile][startRank].canMove(startFile, startRank, endFile, endRank)) {
-            mSquares[endFile][endRank] = mSquares[startFile][startRank];
+        ChessPiece movingPiece = mSquares[startFile][startRank];
+
+        if (movingPiece instanceof King && startRank == endRank &&
+                Math.abs(endFile - startFile) == 2) {
+            // Castling
+            if (movingPiece.isWhite() && startRank == 7 && startFile == 4) {
+                if (endFile - startFile > 0) {
+                    ChessPiece castleRook = mSquares[7][7];
+                    if (castleRook != null && castleRook instanceof  Rook) {
+                        // White castling king side
+                        mSquares[endFile][endRank] = movingPiece;
+                        mSquares[startFile][startRank] = null;
+                        mSquares[endFile - 1][endRank] = castleRook;
+                        mSquares[7][7] = null;
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    ChessPiece castleRook = mSquares[0][7];
+                    if (castleRook != null && castleRook instanceof Rook) {
+                        // White castling queen side
+                        mSquares[endFile][endRank] = movingPiece;
+                        mSquares[startFile][startRank] = null;
+                        mSquares[endFile + 1][endRank] = castleRook;
+                        mSquares[0][7] = null;
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            } else if (startRank == 0 && startFile == 4) {
+                if (endFile - startFile > 0) {
+                    ChessPiece castleRook = mSquares[7][0];
+                    if (castleRook != null && castleRook instanceof  Rook) {
+                        // Black castling king side
+                        mSquares[endFile][endRank] = movingPiece;
+                        mSquares[startFile][startRank] = null;
+                        mSquares[endFile - 1][endRank] = castleRook;
+                        mSquares[7][0] = null;
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    ChessPiece castleRook = mSquares[0][0];
+                    if (castleRook != null && castleRook instanceof Rook) {
+                        // Black castling queen side
+                        mSquares[endFile][endRank] = movingPiece;
+                        mSquares[startFile][startRank] = null;
+                        mSquares[endFile + 1][endRank] = castleRook;
+                        mSquares[0][0] = null;
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            } else {
+                return false;
+            }
+        } else if (movingPiece.canMove(startFile, startRank, endFile, endRank)) {
+            mSquares[endFile][endRank] = movingPiece;
             mSquares[startFile][startRank] = null;
             return true;
         } else {

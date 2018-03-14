@@ -36,6 +36,7 @@ public class ChessGame {
 
     public boolean move(int startFile, int startRank, int endFile, int endRank) {
         if (performMove(startFile, startRank, endFile, endRank)) {
+            checkForEnPassant(startFile, startRank, endFile, endRank);
             mIsWhitesTurn = !mIsWhitesTurn;
             return true;
         } else {
@@ -66,12 +67,13 @@ public class ChessGame {
 
         if (movingPiece instanceof Pawn) {
             if (startFile != endFile) {
-                // TODO: fill this in; remember capture without en passant happens sideways
-                if (!canEnPassantHappen()) {
-                    return false;
+                if (endSquare != null) {
+                    // pawn capture
+                    return mChessboard.movePiece(startFile, startRank, endFile, endRank);
                 } else {
                     // En passant move
-                    return false;
+                    return (endFile == mEnPassantFile && endRank == mEnPassantRank) &&
+                            mChessboard.movePiece(startFile, startRank, endFile, endRank);
                 }
             } else {
                 int moveSize = Math.abs(endRank - startRank);
@@ -93,10 +95,27 @@ public class ChessGame {
                     return mChessboard.movePiece(startFile, startRank, endFile, endRank);
                 }
             }
-        } else if (movingPiece instanceof Knight || movingPiece instanceof King) {
+        } else if (movingPiece instanceof Knight) {
             // if it's a knight it can jump over other pieces
-            // And a king can only move one square
             return mChessboard.movePiece(startFile, startRank, endFile, endRank);
+        } else if (movingPiece instanceof King) {
+            if (startRank == endRank && Math.abs(endFile - startFile) == 2) {
+                // Castling
+                if (endSquare != null) {
+                    return false;
+                } else if (endFile - startFile > 0) {
+                    // castling king side
+                    return (mChessboard.getPiece(startFile + 1, startRank) == null) &&
+                            mChessboard.movePiece(startFile, startRank, endFile, endRank);
+                } else {
+                    // castling queen side
+                   return (mChessboard.getPiece(startFile - 1, startRank) == null) &&
+                           (mChessboard.getPiece(startFile - 3, startRank) == null) &&
+                           mChessboard.movePiece(startFile, startRank, endFile, endRank);
+                }
+            } else {
+                return mChessboard.movePiece(startFile, startRank, endFile, endRank);
+            }
         } else {
             // Any other piece need to check the squares in between
             int horizontalMoveDirection = endFile - startFile;
@@ -171,13 +190,22 @@ public class ChessGame {
         }
     }
 
+    private void checkForEnPassant(int startFile, int startRank, int endFile, int endRank) {
+        if (mChessboard.getPiece(endFile, endRank) instanceof Pawn &&
+                (Math.abs(endRank - startRank) == 2)) {
+            // Need to set en passant square
+            if (mIsWhitesTurn) {
+                setEnPassantSquare(endFile, endRank + 1);
+            } else {
+                setEnPassantSquare(endFile, endRank - 1);
+            }
+        } else {
+            setEnPassantSquare(-1, -1);
+        }
+    }
+
     private void setEnPassantSquare(int file, int rank) {
         mEnPassantFile = file;
         mEnPassantRank = rank;
-    }
-
-    private boolean canEnPassantHappen() {
-        return mEnPassantFile >= 0 && mEnPassantFile <= 7 &&
-                mEnPassantRank >= 0 && mEnPassantRank <= 7;
     }
 }

@@ -3,6 +3,7 @@ package com.gregspitz.chessapp.domain.model.pieces;
 /**
  * A King
  * can move in any direction one square
+ * king is unaware that it can castle, the board keeps that info
  */
 
 public class King extends ChessPiece {

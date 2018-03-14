@@ -171,4 +171,84 @@ public class ChessboardTest {
         assertFalse(mChessboard.getPiece(7, 6).isWhite());
         assertNull(mChessboard.getPiece(7, 0));
     }
+
+    @Test
+    public void whiteKing_canCastleKingSize() {
+        // The board allow this to happen with pieces in between
+        mChessboard.setInitialPosition();
+        assertTrue(mChessboard.movePiece(4, 7, 6, 7));
+        assertTrue(mChessboard.getPiece(6, 7) instanceof  King);
+        assertTrue(mChessboard.getPiece(6, 7).isWhite());
+        assertTrue(mChessboard.getPiece(5, 7) instanceof Rook);
+        assertTrue(mChessboard.getPiece(5, 7).isWhite());
+        assertNull(mChessboard.getPiece(4, 7));
+        assertNull(mChessboard.getPiece(7, 7));
+    }
+
+    @Test
+    public void whiteKing_canCastleQueenSize() {
+        // The board allow this to happen with pieces in between
+        mChessboard.setInitialPosition();
+        assertTrue(mChessboard.movePiece(4, 7, 2, 7));
+        assertTrue(mChessboard.getPiece(2, 7) instanceof  King);
+        assertTrue(mChessboard.getPiece(2, 7).isWhite());
+        assertTrue(mChessboard.getPiece(3, 7) instanceof Rook);
+        assertTrue(mChessboard.getPiece(3, 7).isWhite());
+        assertNull(mChessboard.getPiece(4, 7));
+        assertNull(mChessboard.getPiece(0, 7));
+    }
+
+    @Test
+    public void blackKing_canCastleKingSize() {
+        // The board allow this to happen with pieces in between
+        mChessboard.setInitialPosition();
+        assertTrue(mChessboard.movePiece(4, 0, 6, 0));
+        assertTrue(mChessboard.getPiece(6, 0) instanceof  King);
+        assertFalse(mChessboard.getPiece(6, 0).isWhite());
+        assertTrue(mChessboard.getPiece(5, 0) instanceof Rook);
+        assertFalse(mChessboard.getPiece(5, 0).isWhite());
+        assertNull(mChessboard.getPiece(4, 0));
+        assertNull(mChessboard.getPiece(7, 0));
+    }
+
+    @Test
+    public void blackKing_canCastleQueenSize() {
+        // The board allow this to happen with pieces in between
+        mChessboard.setInitialPosition();
+        assertTrue(mChessboard.movePiece(4, 0, 2, 0));
+        assertTrue(mChessboard.getPiece(2, 0) instanceof  King);
+        assertFalse(mChessboard.getPiece(2, 0).isWhite());
+        assertTrue(mChessboard.getPiece(3, 0) instanceof Rook);
+        assertFalse(mChessboard.getPiece(3, 0).isWhite());
+        assertNull(mChessboard.getPiece(4, 0));
+        assertNull(mChessboard.getPiece(0, 0));
+    }
+
+    @Test
+    public void whiteKing_cannotCastleKingSideAfterHavingMoved() {
+        mChessboard.setInitialPosition();
+        assertTrue(mChessboard.movePiece(4, 7, 3, 7));
+        assertFalse(mChessboard.movePiece(3, 7, 5, 7));
+    }
+
+    @Test
+    public void whiteKing_cannotCastleQueenSideAfterHavingMoved() {
+        mChessboard.setInitialPosition();
+        assertTrue(mChessboard.movePiece(4, 7, 3, 7));
+        assertFalse(mChessboard.movePiece(3, 7, 1, 7));
+    }
+
+    @Test
+    public void blackKing_cannotCastleKingSideAfterHavingMoved() {
+        mChessboard.setInitialPosition();
+        assertTrue(mChessboard.movePiece(4, 0, 3, 0));
+        assertFalse(mChessboard.movePiece(3, 0, 5, 0));
+    }
+
+    @Test
+    public void blackKing_cannotCastleQueenSideAfterHavingMoved() {
+        mChessboard.setInitialPosition();
+        assertTrue(mChessboard.movePiece(4, 0, 3, 0));
+        assertFalse(mChessboard.movePiece(3, 0, 1, 0));
+    }
 }
