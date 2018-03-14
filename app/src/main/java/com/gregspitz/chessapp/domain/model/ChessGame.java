@@ -208,4 +208,10 @@ public class ChessGame {
         mEnPassantFile = file;
         mEnPassantRank = rank;
     }
+
+    @Override
+    public String toString() {
+        return mChessboard.toString() + "\nMove: " + (mIsWhitesTurn ? "White" : "Black") +
+                "\n";
+    }
 }

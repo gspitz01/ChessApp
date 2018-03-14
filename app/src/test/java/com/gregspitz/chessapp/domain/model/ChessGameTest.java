@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static com.gregspitz.chessapp.domain.model.TestGames.ARONIAN_KRAMNIK_CANDIDATES_2018;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -52,5 +53,18 @@ public class ChessGameTest {
         for (int[] move : ARONIAN_KRAMNIK_CANDIDATES_2018) {
             assertTrue(mChessGame.move(move[0], move[1], move[2], move[3]));
         }
+    }
+
+    @Test
+    public void printBeforeAnyMoves_printsCorrectly() {
+        assertEquals(TestGames.STARTING_POSITION_PRINT + "\nMove: White\n",
+                mChessGame.toString());
+    }
+
+    @Test
+    public void printAfter1E4_printsCorrectly() {
+        assertTrue(mChessGame.move(4, 6, 4, 4));
+        assertEquals(TestGames.AFTER_1E4_PRINT + "\nMove: Black\n",
+                mChessGame.toString());
     }
 }

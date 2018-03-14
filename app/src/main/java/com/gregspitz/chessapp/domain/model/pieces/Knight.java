@@ -26,4 +26,9 @@ public class Knight extends ChessPiece {
                 return false;
         }
     }
+
+    @Override
+    public String toString() {
+        return mIsWhite ? "N" : "n";
+    }
 }

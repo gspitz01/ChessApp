@@ -19,4 +19,12 @@ public class TestGames {
             {3, 1, 2, 2}, // ... dxc6
             {4, 7, 5, 7}, // 6. O-O
     };
+
+    public static final String STARTING_POSITION_PRINT =
+            "Chessboard:\nrnbqkbnr\npppppppp\n________\n________" +
+            "\n________\n________\nPPPPPPPP\nRNBQKBNR\n";
+
+    public static final String AFTER_1E4_PRINT =
+            "Chessboard:\nrnbqkbnr\npppppppp\n________\n________" +
+                    "\n____P___\n________\nPPPP_PPP\nRNBQKBNR\n";
 }

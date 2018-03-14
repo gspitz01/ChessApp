@@ -10,6 +10,7 @@ import com.gregspitz.chessapp.domain.model.pieces.Rook;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -250,5 +251,18 @@ public class ChessboardTest {
         mChessboard.setInitialPosition();
         assertTrue(mChessboard.movePiece(4, 0, 3, 0));
         assertFalse(mChessboard.movePiece(3, 0, 1, 0));
+    }
+
+    @Test
+    public void initialPositionToString_returnsCorrect() {
+        mChessboard.setInitialPosition();
+        assertEquals(TestGames.STARTING_POSITION_PRINT, mChessboard.toString());
+    }
+
+    @Test
+    public void after1e4_toStringReturnsCorrect() {
+        mChessboard.setInitialPosition();
+        assertTrue(mChessboard.movePiece(4, 6, 4, 4));
+        assertEquals(TestGames.AFTER_1E4_PRINT, mChessboard.toString());
     }
 }

@@ -16,4 +16,9 @@ public class Rook extends ChessPiece {
         return !(endFile - startFile == 0 && endRank - startRank== 0) &&
                 (endFile == startFile || endRank == startRank);
     }
+
+    @Override
+    public String toString() {
+        return mIsWhite ? "R" : "r";
+    }
 }

@@ -16,4 +16,9 @@ public class Bishop extends ChessPiece {
         return !(endFile - startFile == 0 && endRank - startRank == 0) &&
                 (Math.abs(endFile - startFile) == Math.abs(endRank - startRank));
     }
+
+    @Override
+    public String toString() {
+        return mIsWhite ? "B" : "b";
+    }
 }

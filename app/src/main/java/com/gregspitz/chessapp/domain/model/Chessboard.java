@@ -164,4 +164,26 @@ public class Chessboard {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        ChessPiece[][] printableBoard = new ChessPiece[SIZE][SIZE];
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                printableBoard[j][i] = mSquares[i][j];
+            }
+        }
+        StringBuilder print = new StringBuilder("Chessboard:\n");
+        for (ChessPiece[] ranks : printableBoard) {
+            for (ChessPiece square : ranks) {
+                if (square == null) {
+                    print.append("_");
+                } else {
+                    print.append(square);
+                }
+            }
+            print.append("\n");
+        }
+        return print.toString();
+    }
 }

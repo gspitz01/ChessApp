@@ -18,4 +18,9 @@ public class King extends ChessPiece {
                 (endFile - startFile >= -1 && endFile - startFile <= 1) &&
                 (endRank - startRank >= -1 && endRank - startRank <= 1);
     }
+
+    @Override
+    public String toString() {
+        return mIsWhite ? "K" : "k";
+    }
 }

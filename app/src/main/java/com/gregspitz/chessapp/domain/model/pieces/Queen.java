@@ -17,4 +17,9 @@ public class Queen extends ChessPiece {
                 (Math.abs(endFile - startFile) == Math.abs(endRank - startRank) ||
                         endFile == startFile || endRank == startRank);
     }
+
+    @Override
+    public String toString() {
+        return mIsWhite ? "Q" : "q";
+    }
 }
